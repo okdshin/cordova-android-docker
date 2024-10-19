@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-ndk-echo" version="0.1.0"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>ndk_echo</name>
+    <js-module name="NdkEcho" src="www/ndk_echo.js">
+        <clobbers target="NdkEcho" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="NdkEcho" >
+                <param name="android-package" value="com.rs.my.testapp.plugin.NdkEcho" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <source-file src="src/android/NdkEcho.java" target-dir="src/com/rs/my/testapp/plugin/" />
+
+        <source-file src="src/android/jni/CMakeLists.txt" target-dir="app/src/android/jni/" />
+        <source-file src="src/android/jni/echo.cpp" target-dir="app/src/android/jni/" />
+
+        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference"/>
+    </platform>
+
+</plugin>

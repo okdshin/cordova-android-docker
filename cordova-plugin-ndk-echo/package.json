@@ -1,0 +1,10 @@
+{
+  "name": "cordova-plugin-ndk-echo",
+  "version": "0.0.1",
+  "cordova": {
+    "id": "cordova-plugin-ndk-echo",
+    "platforms": [
+      "android"
+    ]
+  }
+}
