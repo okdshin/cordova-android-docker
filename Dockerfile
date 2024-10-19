@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 # Setup Android SDK
 RUN wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
 RUN unzip commandlinetools-linux-11076708_latest.zip
-RUN mkdir /android_sdk && \
+RUN mkdir /android_sdk && chmod 777 /android_sdk && \
     (yes | /cmdline-tools/bin/sdkmanager --sdk_root=/android_sdk --install "build-tools;34.0.0")
 ENV ANDROID_HOME=/android_sdk
 
@@ -24,3 +24,7 @@ RUN unzip gradle-8.7-bin.zip && ln -s /gradle-8.7/bin/gradle /bin/gradle
 RUN npm install -g cordova \
     && (no | cordova)  # disable telemetry
 RUN cd /tmp && cordova create tmpApp && cd tmpApp && cordova platform add android && cordova build android
+
+# Setup Android NDK
+RUN yes | /cmdline-tools/bin/sdkmanager --sdk_root=/android_sdk --install "ndk;27.2.12479018"
+RUN yes | /cmdline-tools/bin/sdkmanager --sdk_root=/android_sdk --install "cmake;3.22.1"
